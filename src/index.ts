@@ -3,6 +3,8 @@ import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
 import { camera } from "./components/camera";
+import { leftHand } from "./components/left-hand";
+import { rightHand } from "./components/right-hand";
 
 scene.add(ground);
 scene.add(ambientLight);
@@ -17,6 +19,8 @@ renderer.xr.enabled = true;
 
 renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
+  leftHand.position.add(renderer.xr.getController(0).position);
+  rightHand.position.add(renderer.xr.getController(1).position);
 });
 
 window.onresize = () => {
@@ -39,6 +43,6 @@ window.onclick = async () => {
       ],
     };
     const session = await navigator.xr.requestSession(mode, options);
-    await renderer.xr.setSession(session!);
+    await renderer.xr.setSession(session);
   }
 };
