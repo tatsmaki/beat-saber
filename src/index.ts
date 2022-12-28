@@ -28,7 +28,7 @@ renderer.setAnimationLoop(() => {
   rightHand.position.copy(rightController.position);
   rightHand.rotation.copy(rightController.rotation);
 
-  sun.rotateZ(sun.rotation.z + 0.01);
+  sun.rotation.z -= 0.001;
 
   renderer.render(scene, camera);
 });
