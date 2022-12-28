@@ -9,6 +9,7 @@ import { rightHand } from "./components/right-hand";
 scene.add(ground);
 scene.add(ambientLight);
 scene.add(camera);
+scene.add(leftHand, rightHand);
 
 const renderer = new WebGLRenderer({ antialias: true });
 
