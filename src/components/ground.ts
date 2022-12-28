@@ -1,6 +1,6 @@
 import { Mesh, MeshLambertMaterial, PlaneGeometry } from "three";
 
-const geometry = new PlaneGeometry(30, 30);
+const geometry = new PlaneGeometry(5, 5);
 const material = new MeshLambertMaterial({ color: 0xffffff });
 
 export const ground = new Mesh(geometry, material);
