@@ -20,13 +20,17 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.xr.enabled = true;
 
 renderer.setAnimationLoop(() => {
-  renderer.render(scene, camera);
   const leftController = renderer.xr.getController(0);
   leftHand.position.copy(leftController.position);
   leftHand.rotation.copy(leftController.rotation);
+
   const rightController = renderer.xr.getController(1);
   rightHand.position.copy(rightController.position);
   rightHand.rotation.copy(rightController.rotation);
+
+  sun.rotateZ(sun.rotation.z + 0.01);
+
+  renderer.render(scene, camera);
 });
 
 window.onresize = () => {
