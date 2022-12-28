@@ -5,7 +5,7 @@ const geometry = new CylinderGeometry(0.02, 0.02, 0.2);
 const material = new MeshLambertMaterial({ color: "red" });
 
 const mesh = new Mesh(geometry, material);
-mesh.position.set(-0.02, -0.02, 0);
+mesh.position.set(0.03, 0.03, 0);
 mesh.rotateX(degToRad(-45));
 
 export const rightHand = new Group().add(mesh);
