@@ -25,23 +25,20 @@ window.onresize = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
-const start = async () => {
+window.onclick = async () => {
   if (navigator.xr) {
     const mode = "immersive-vr";
-    // await navigator.xr.isSessionSupported(mode);
     const options = {
       optionalFeatures: [
+        "local",
         "local-floor",
-        "bounded-floor",
-        "hand-tracking",
+        "viewer",
+        "anchor",
+        "depth-sensing",
         "layers",
       ],
     };
-    const session = await navigator.xr
-      .requestSession(mode, options)
-      .catch((error) => alert(error));
+    const session = await navigator.xr.requestSession(mode, options);
     await renderer.xr.setSession(session!);
   }
 };
-
-start();
