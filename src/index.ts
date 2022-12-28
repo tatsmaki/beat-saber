@@ -28,7 +28,7 @@ window.onresize = () => {
 const start = async () => {
   if (navigator.xr) {
     const mode = "immersive-vr";
-    await navigator.xr.isSessionSupported(mode);
+    // await navigator.xr.isSessionSupported(mode);
     const options = {
       optionalFeatures: [
         "local-floor",
@@ -37,8 +37,10 @@ const start = async () => {
         "layers",
       ],
     };
-    const session = await navigator.xr.requestSession(mode, options);
-    await renderer.xr.setSession(session);
+    const session = await navigator.xr
+      .requestSession(mode, options)
+      .catch((error) => alert(error));
+    await renderer.xr.setSession(session!);
   }
 };
 
