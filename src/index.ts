@@ -2,12 +2,13 @@ import { WebGLRenderer } from "three";
 import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
+import { sun } from "./components/sun";
 import { camera } from "./components/camera";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
 
 scene.add(ground);
-scene.add(ambientLight);
+scene.add(ambientLight, sun);
 scene.add(camera);
 scene.add(leftHand, rightHand);
 

@@ -8,4 +8,6 @@ const mesh = new Mesh(geometry, material);
 mesh.position.set(0, 0, 0.1);
 mesh.rotateX(degToRad(-45));
 
-export const leftHand = new Group().add(mesh);
+export const leftHand = new Group();
+
+leftHand.add(mesh);
