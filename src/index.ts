@@ -38,14 +38,20 @@ renderer.setAnimationLoop(() => {
 
   raycaster.ray.origin.copy(renderer.xr.getCamera().position);
   const [intersection] = raycaster.intersectObjects(scene.children, true);
-  if (intersection && intersection.distance <= 1.7) {
-    if (intersection.distance !== 1.7) {
-      helmet.position.y += 1.7 - intersection.distance;
-    }
+
+  if (intersection?.distance <= 1.7) {
     fallSpeed = 0;
-  } else {
+  }
+  if (intersection?.distance < 1.6) {
+    helmet.position.y += 1.65 - intersection.distance;
+  }
+  if (!intersection || intersection?.distance > 1.7) {
     helmet.position.y -= fallSpeed;
-    fallSpeed += 0.001;
+    fallSpeed += 0.002;
+  }
+
+  if (helmet.position.y < -20) {
+    helmet.position.y = 20;
   }
 
   renderer.render(scene, camera);

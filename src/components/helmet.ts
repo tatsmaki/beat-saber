@@ -7,8 +7,6 @@ const far = 100;
 
 export const camera = new PerspectiveCamera(fov, aspect, near, far);
 
-camera.position.set(0, 0, 1.7);
-
 export const helmet = new Group();
 
 helmet.add(camera);
