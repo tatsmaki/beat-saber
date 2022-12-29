@@ -1,4 +1,4 @@
-import { WebGLRenderer } from "three";
+import { PCFSoftShadowMap, WebGLRenderer } from "three";
 import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
@@ -18,7 +18,8 @@ const renderer = new WebGLRenderer({ antialias: true });
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = PCFSoftShadowMap;
 renderer.xr.enabled = true;
 
 renderer.setAnimationLoop(() => {
