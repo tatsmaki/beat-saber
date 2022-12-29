@@ -8,3 +8,4 @@ export const ground = new Mesh(geometry, material);
 
 ground.position.set(0, 0, 0);
 ground.rotation.set(degToRad(-90), 0, 0);
+ground.receiveShadow = true;

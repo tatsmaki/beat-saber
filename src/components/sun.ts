@@ -16,6 +16,7 @@ mesh.rotateY(degToRad(90));
 
 const light = new PointLight(0xfffbdb);
 light.position.set(-49, 0, 0);
+light.castShadow = true;
 
 export const sun = new Group();
 

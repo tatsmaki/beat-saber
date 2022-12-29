@@ -6,11 +6,13 @@ import { sun } from "./components/sun";
 import { camera } from "./components/camera";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
+import { ladder } from "./components/ladder";
 
 scene.add(ground);
 scene.add(ambientLight, sun);
 scene.add(camera);
 scene.add(leftHand, rightHand);
+scene.add(...ladder.steps);
 
 const renderer = new WebGLRenderer({ antialias: true });
 
