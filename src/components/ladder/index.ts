@@ -11,7 +11,7 @@ class Ladder {
       this.counter += 1;
       const plane = step.clone();
       plane.position.set(0, height, 0);
-      plane.rotation.set(radToDeg(-90), 0, 1 / Math.sin(1 / height));
+      plane.rotation.set(radToDeg(-90), 0, -2 / Math.sin(1 / height));
       this.steps.push(plane);
     }
   }
