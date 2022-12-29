@@ -38,22 +38,15 @@ renderer.setAnimationLoop(() => {
 
   raycaster.ray.origin.copy(renderer.xr.getCamera().position);
   const [intersection] = raycaster.intersectObjects(scene.children, true);
-
-  if (intersection && intersection.distance < 1.7) {
-    // gravity = 0;
-    // helmet.position.y += 0.01;
+  if (intersection && intersection.distance <= 1.7) {
+    if (intersection.distance !== 1.7) {
+      helmet.position.y += 1.7 - intersection.distance;
+    }
     fallSpeed = 0;
   } else {
     helmet.position.y -= fallSpeed;
     fallSpeed += 0.001;
-    // gravity += 0.001;
   }
-  // if (intersection && intersection.distance < 1.7) {
-  //   helmet.position.y += 1.7 - intersection.distance;
-  // } else {
-  //   helmet.position.y -= 0.001;
-  //   // console.log(camera.position.y);
-  // }
 
   renderer.render(scene, camera);
 });
