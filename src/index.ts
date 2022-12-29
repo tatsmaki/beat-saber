@@ -3,14 +3,15 @@ import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
 import { sun } from "./components/sun";
-import { camera } from "./components/camera";
+import { helmet, camera } from "./components/helmet";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
 import { ladder } from "./components/ladder";
+import { raycaster } from "./components/raycaster";
 
 scene.add(ground);
 scene.add(ambientLight, sun);
-scene.add(camera);
+scene.add(helmet);
 scene.add(leftHand, rightHand);
 scene.add(...ladder.steps);
 
@@ -21,6 +22,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = PCFSoftShadowMap;
 renderer.xr.enabled = true;
+
+let fallSpeed = 0;
 
 renderer.setAnimationLoop(() => {
   const leftController = renderer.xr.getController(0);
@@ -33,14 +36,27 @@ renderer.setAnimationLoop(() => {
 
   sun.rotation.z -= 0.001;
 
+  raycaster.ray.origin.copy(renderer.xr.getCamera().position);
+  const [intersection] = raycaster.intersectObjects(scene.children, true);
+
+  if (intersection && intersection.distance < 1.7) {
+    // gravity = 0;
+    // helmet.position.y += 0.01;
+    fallSpeed = 0;
+  } else {
+    helmet.position.y -= fallSpeed;
+    fallSpeed += 0.001;
+    // gravity += 0.001;
+  }
+  // if (intersection && intersection.distance < 1.7) {
+  //   helmet.position.y += 1.7 - intersection.distance;
+  // } else {
+  //   helmet.position.y -= 0.001;
+  //   // console.log(camera.position.y);
+  // }
+
   renderer.render(scene, camera);
 });
-
-window.onresize = () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-};
 
 window.onclick = async () => {
   if (navigator.xr) {
