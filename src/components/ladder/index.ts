@@ -1,9 +1,9 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { radToDeg } from "three/src/math/MathUtils";
 import { step } from "./step";
 
 class Ladder {
-  steps: Mesh[] = [];
+  steps: Group[] = [];
   counter = 0;
 
   constructor() {
@@ -11,7 +11,7 @@ class Ladder {
       this.counter += 1;
       const plane = step.clone();
       plane.position.set(0, height, 0);
-      plane.rotation.set(radToDeg(-90), 0, Math.sin(height));
+      plane.rotation.set(radToDeg(-90), 0, 1 / Math.sin(1 / height));
       this.steps.push(plane);
     }
   }

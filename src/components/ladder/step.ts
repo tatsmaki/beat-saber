@@ -1,9 +1,19 @@
-import { DoubleSide, Mesh, MeshLambertMaterial, PlaneGeometry } from "three";
+import {
+  DoubleSide,
+  Group,
+  Mesh,
+  MeshLambertMaterial,
+  PlaneGeometry,
+} from "three";
 
 const geometry = new PlaneGeometry(0.5, 1);
 const material = new MeshLambertMaterial({ side: DoubleSide });
 
-export const step = new Mesh(geometry, material);
+const mesh = new Mesh(geometry, material);
+mesh.receiveShadow = true;
+mesh.castShadow = true;
+mesh.translateX(1);
 
-step.receiveShadow = true;
-step.castShadow = true;
+export const step = new Group();
+
+step.add(mesh);
