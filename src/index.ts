@@ -1,4 +1,5 @@
 import { PCFSoftShadowMap, WebGLRenderer } from "three";
+import "./index.css";
 import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
@@ -57,7 +58,9 @@ renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
 });
 
-window.onclick = async () => {
+const button = document.getElementById("root")!;
+
+button.onclick = async () => {
   if (navigator.xr) {
     const mode = "immersive-vr";
     const options = {
