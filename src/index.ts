@@ -1,30 +1,26 @@
-import { PCFSoftShadowMap, WebGLRenderer } from "three";
 import "./index.css";
 import { scene } from "./components/scene";
 import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
 import { sun } from "./components/sun";
-import { helmet, camera } from "./components/helmet";
+import { head, camera } from "./components/head";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
 import { ladder } from "./components/ladder";
-import { raycaster } from "./components/raycaster";
+import { renderer } from "./renderer";
+import { fallFrame } from "./frames/fall.frame";
+import { XrController } from "./controllers/xr.controller";
+import { LockController } from "./controllers/lock.controller";
+import { MouseController } from "./controllers/mouse.controller";
+import { KeyboardController } from "./controllers/keyboard.controller";
+import { WebController } from "./controllers/web.controller";
+import { sunFrame } from "./frames/sun.frame";
 
 scene.add(ground);
 scene.add(ambientLight, sun);
-scene.add(helmet);
+scene.add(head);
 scene.add(leftHand, rightHand);
 scene.add(...ladder.steps);
-
-const renderer = new WebGLRenderer({ antialias: true });
-
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = PCFSoftShadowMap;
-renderer.xr.enabled = true;
-
-let fallSpeed = 0;
 
 renderer.setAnimationLoop(() => {
   const leftController = renderer.xr.getController(0);
@@ -35,45 +31,17 @@ renderer.setAnimationLoop(() => {
   rightHand.position.copy(rightController.position);
   rightHand.rotation.copy(rightController.rotation);
 
-  sun.rotation.z -= 0.001;
+  sunFrame();
 
-  raycaster.ray.origin.copy(renderer.xr.getCamera().position);
-  const [intersection] = raycaster.intersectObjects(scene.children, true);
+  fallFrame();
 
-  if (intersection?.distance <= 1.7) {
-    fallSpeed = 0;
-  }
-  if (intersection?.distance < 1.6) {
-    helmet.position.y += 1.65 - intersection.distance;
-  }
-  if (!intersection || intersection?.distance > 1.7) {
-    helmet.position.y -= fallSpeed;
-    fallSpeed += 0.002;
-  }
-
-  if (helmet.position.y < -20) {
-    helmet.position.y = 20;
-  }
+  head.position.addScaledVector(keyboardController.direction, 0.1);
 
   renderer.render(scene, camera);
 });
 
-const button = document.getElementById("root")!;
-
-button.onclick = async () => {
-  if (navigator.xr) {
-    const mode = "immersive-vr";
-    const options = {
-      optionalFeatures: [
-        "local",
-        "local-floor",
-        "viewer",
-        "anchor",
-        "depth-sensing",
-        "layers",
-      ],
-    };
-    const session = await navigator.xr.requestSession(mode, options);
-    await renderer.xr.setSession(session);
-  }
-};
+const xrController = new XrController(renderer);
+const lockController = new LockController(xrController);
+const mouseController = new MouseController(head);
+const keyboardController = new KeyboardController();
+const webController = new WebController(xrController, lockController, renderer);
