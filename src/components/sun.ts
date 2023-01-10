@@ -14,15 +14,15 @@ const mesh = new Mesh(geometry, material);
 mesh.position.set(-50, 0, 0);
 mesh.rotateY(degToRad(90));
 
-const light = new DirectionalLight(0xfffbdb);
-light.position.set(-49, 0, 0);
-light.castShadow = true;
-light.lookAt(0, 0, 0);
-light.shadow.bias = -0.0001;
-light.shadow.mapSize.width = 2048;
-light.shadow.mapSize.height = 2048;
+export const directionalLight = new DirectionalLight(0xfffbdb);
+directionalLight.position.set(-49, 0, 0);
+directionalLight.castShadow = true;
+directionalLight.lookAt(0, 0, 0);
+directionalLight.shadow.bias = -0.0001;
+directionalLight.shadow.mapSize.width = 2048;
+directionalLight.shadow.mapSize.height = 2048;
 
 export const sun = new Group();
 
 sun.add(mesh);
-sun.add(light);
+sun.add(directionalLight);
