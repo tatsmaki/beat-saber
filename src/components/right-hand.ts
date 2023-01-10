@@ -6,7 +6,7 @@ const material = new MeshLambertMaterial({ color: "red" });
 
 const mesh = new Mesh(geometry, material);
 // mesh.position.set(0, 0, 0.1);
-mesh.rotateX(degToRad(-45));
+mesh.rotateX(degToRad(90));
 
 export const rightHand = new Group();
 
