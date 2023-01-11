@@ -18,9 +18,10 @@ export const rightHand = new Group();
 
 rightHand.add(mesh);
 
-const light = new RectAreaLight(0xffffff, 1, 0.02, 1);
+const light = new RectAreaLight("red", 10, 0.02, 1);
 light.translateZ(-0.5);
 light.rotateX(degToRad(90));
+light.castShadow = true;
 
 const helper = new RectAreaLightHelper(light);
 light.add(helper);
