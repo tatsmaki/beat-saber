@@ -1,4 +1,3 @@
-import { WebGLRenderer } from "three";
 import { LockController } from "./lock.controller";
 import { XrController } from "./xr.controller";
 
@@ -8,15 +7,14 @@ export class WebController {
   constructor(
     private readonly xrController: XrController,
     private readonly lockController: LockController,
-    private readonly renderer: WebGLRenderer
+    private readonly setAnimationLoop: () => void
   ) {
     this.button.onclick = this.handleClick.bind(this);
   }
 
   handleClick() {
+    this.setAnimationLoop();
     this.xrController.handleClick();
-    setTimeout(() => {
-      this.lockController.handleClick(this.renderer.domElement);
-    }, 500);
+    setTimeout(() => this.lockController.handleClick(), 500);
   }
 }

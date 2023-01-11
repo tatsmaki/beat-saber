@@ -5,7 +5,7 @@ import { MouseController } from "./controllers/mouse.controller";
 import { KeyboardController } from "./controllers/keyboard.controller";
 import { WebController } from "./controllers/web.controller";
 import { scene } from "./components/scene";
-import { ground } from "./components/ground";
+import { ground, pmremGenerator } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
 import { sun } from "./components/sun";
 import { head, camera } from "./components/head";
@@ -19,24 +19,25 @@ import { fallFrame } from "./frames/fall.frame";
 import { moveFrame } from "./frames/move.frame";
 
 scene.add(ground);
-scene.add(ambientLight, sun);
+// scene.add(ambientLight);
 scene.add(head);
 scene.add(leftHand, rightHand);
 scene.add(...ladder.steps);
 
-renderer.setAnimationLoop((time: number) => {
-  leftHandFrame();
-  rightHandFrame();
+const setAnimationLoop = () => {
+  renderer.setAnimationLoop(() => {
+    moveFrame(keyboardController);
 
-  fallFrame();
-
-  moveFrame(keyboardController);
-
-  renderer.render(scene, camera);
-});
+    renderer.render(scene, camera);
+  });
+};
 
 const xrController = new XrController(renderer);
-const lockController = new LockController(xrController);
+const lockController = new LockController(xrController, renderer);
 const mouseController = new MouseController(head);
 const keyboardController = new KeyboardController();
-const webController = new WebController(xrController, lockController, renderer);
+const webController = new WebController(
+  xrController,
+  lockController,
+  setAnimationLoop
+);

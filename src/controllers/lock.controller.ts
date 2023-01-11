@@ -1,21 +1,22 @@
+import { WebGLRenderer } from "three";
 import { XrController } from "./xr.controller";
 
 export class LockController {
-  private canvas: HTMLCanvasElement | null = null;
-
-  constructor(private readonly xrController: XrController) {
+  constructor(
+    private readonly xrController: XrController,
+    private readonly renderer: WebGLRenderer
+  ) {
     document.onpointerlockchange = this.handlePointerLockChange.bind(this);
   }
 
-  handleClick(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-    if (document.pointerLockElement !== this.canvas) {
-      this.canvas.requestPointerLock();
+  handleClick() {
+    if (document.pointerLockElement !== this.renderer.domElement) {
+      this.renderer.domElement.requestPointerLock();
     }
   }
 
   handleExit() {
-    if (document.pointerLockElement === this.canvas) {
+    if (document.pointerLockElement === this.renderer.domElement) {
       document.exitPointerLock();
     }
   }
