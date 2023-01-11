@@ -5,7 +5,7 @@ import { MouseController } from "./controllers/mouse.controller";
 import { KeyboardController } from "./controllers/keyboard.controller";
 import { WebController } from "./controllers/web.controller";
 import { scene } from "./components/scene";
-import { ground, pmremGenerator } from "./components/ground";
+import { ground } from "./components/ground";
 import { ambientLight } from "./components/ambient-light";
 import { sun } from "./components/sun";
 import { head, camera } from "./components/head";
