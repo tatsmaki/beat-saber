@@ -26,6 +26,8 @@ scene.add(...ladder.steps);
 
 const setAnimationLoop = () => {
   renderer.setAnimationLoop(() => {
+    leftHandFrame();
+    rightHandFrame();
     moveFrame(keyboardController);
 
     renderer.render(scene, camera);
