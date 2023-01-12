@@ -17,7 +17,6 @@ mesh.rotateX(degToRad(90));
 const light = new RectAreaLight("red", 10, 0.02, 1);
 light.translateZ(-0.5);
 light.rotateX(degToRad(90));
-light.castShadow = true;
 const helper = new RectAreaLightHelper(light);
 light.add(helper);
 

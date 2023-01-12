@@ -5,7 +5,11 @@ import {
   WebGLRenderer,
 } from "three";
 
-export const renderer = new WebGLRenderer({ antialias: true, alpha: true });
+export const renderer = new WebGLRenderer({
+  antialias: true,
+  alpha: true,
+  powerPreference: "high-performance",
+});
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);

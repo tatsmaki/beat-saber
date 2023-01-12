@@ -8,11 +8,12 @@ import {
 import { degToRad } from "three/src/math/MathUtils";
 import { renderer } from "../renderer";
 
-const geometry = new PlaneGeometry(20, 20);
-const material = new MeshPhysicalMaterial({
+const geometry = new PlaneGeometry(4, 4);
+const material = new MeshLambertMaterial({
   color: 0x1a1817,
-  roughness: 0.5,
-  metalness: 0.2,
+  // roughness: 0.5,
+
+  // metalness: 0.5,
 });
 
 export const ground = new Mesh(geometry, material);

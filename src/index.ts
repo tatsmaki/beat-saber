@@ -6,8 +6,8 @@ import { KeyboardController } from "./controllers/keyboard.controller";
 import { WebController } from "./controllers/web.controller";
 import { scene } from "./components/scene";
 import { ground } from "./components/ground";
-import { ambientLight } from "./components/ambient-light";
-import { sun } from "./components/sun";
+// import { ambientLight } from "./components/ambient-light";
+import { directionalLight } from "./components/directional-light";
 import { head, camera } from "./components/head";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
@@ -19,16 +19,16 @@ import { fallFrame } from "./frames/fall.frame";
 import { moveFrame } from "./frames/move.frame";
 
 scene.add(ground);
-// scene.add(ambientLight);
-scene.add(head);
-scene.add(leftHand, rightHand);
-scene.add(...ladder.steps);
+scene.add(directionalLight);
+scene.add(head, leftHand, rightHand);
+scene.add(ladder);
 
 const setAnimationLoop = () => {
   renderer.setAnimationLoop(() => {
     leftHandFrame();
     rightHandFrame();
     moveFrame(keyboardController);
+    ladder.rotation.y -= 0.001;
 
     renderer.render(scene, camera);
   });

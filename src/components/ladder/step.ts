@@ -1,26 +1,27 @@
 import {
-  DoubleSide,
+  BackSide,
+  BufferGeometry,
   Group,
   Mesh,
+  MeshBasicMaterial,
   MeshLambertMaterial,
-  MeshPhysicalMaterial,
-  PlaneGeometry,
+  Vector2,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
-const geometry = new PlaneGeometry(0.5, 1);
-const material = new MeshPhysicalMaterial({
-  side: DoubleSide,
-  roughness: 0.5,
-  metalness: 0.2,
+const geometry = new BufferGeometry();
+geometry.setFromPoints([
+  new Vector2(0, 0),
+  new Vector2(2, 20),
+  new Vector2(4, 0),
+]);
+const material = new MeshLambertMaterial({
+  side: BackSide,
 });
-
 const mesh = new Mesh(geometry, material);
-mesh.receiveShadow = true;
-mesh.castShadow = true;
-mesh.translateX(1);
+mesh.translateX(21);
 mesh.rotation.z = degToRad(90);
+mesh.castShadow = true;
 
 export const step = new Group();
-
 step.add(mesh);
