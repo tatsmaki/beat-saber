@@ -28,21 +28,26 @@ scene.add(ladder);
 scene.add(equalizer, equalizerLeft);
 
 const setAnimationLoop = () => {
-  renderer.setAnimationLoop(() => {
+  renderer.setAnimationLoop((time) => {
     leftHandFrame();
     rightHandFrame();
     moveFrame(keyboardController);
 
     const uint8 = audioController.getFrequency();
     const max = Math.max(...uint8);
+    const min = Math.min(...uint8);
+    const diff = max - min;
+    if (Math.floor(time / 1000) % 2 === 0) {
+      ladder.position.z += diff / 100;
+    } else {
+      ladder.position.z -= diff / 100;
+    }
+
     if (max > 170) {
       ladder.rotation.y += max / 7000;
     } else {
       ladder.rotation.y -= max / 7000;
     }
-    // const min = Math.min(...uint8);
-    // const scale = Math.max(1, min / 64);
-    // ladder.scale.set(scale, 1, scale);
     equalizerFrame(uint8);
     renderer.render(scene, camera);
   });

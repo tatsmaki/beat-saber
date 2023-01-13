@@ -7,7 +7,7 @@ class Ladder {
   counter = 0;
 
   constructor() {
-    for (let height = 1; height < 50; height += 1) {
+    for (let height = 1; height < 200; height += 1) {
       this.counter += 1;
       const plane = step.clone();
       plane.position.set(0, height, 0);

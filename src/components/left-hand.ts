@@ -22,7 +22,7 @@ grip.rotateX(degToRad(90));
 // blade.translateZ(-0.5);
 // blade.rotateX(degToRad(90));
 
-const light = new RectAreaLight("blue", 10, 0.02, 1);
+const light = new RectAreaLight("blue", 20, 0.02, 1);
 light.translateZ(-0.5);
 light.rotateX(degToRad(90));
 const helper = new RectAreaLightHelper(light);
