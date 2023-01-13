@@ -1,6 +1,7 @@
 const { resolve } = require("path");
 const { merge } = require("webpack-merge");
 const CompressionPlugin = require("compression-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
 const config = require("./webpack.config");
 
@@ -10,6 +11,14 @@ module.exports = merge(config, {
   plugins: [
     new CompressionPlugin({
       algorithm: "gzip",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "public/audio",
+          to: "audio",
+        },
+      ],
     }),
   ],
   optimization: {

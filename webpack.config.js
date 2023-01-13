@@ -14,7 +14,6 @@ module.exports = {
       template: "./public/index.html",
     }),
     new ForkTsCheckerWebpackPlugin(),
-    // new CopyWebpackPlugin()
   ],
   module: {
     rules: [
