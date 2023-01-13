@@ -17,19 +17,33 @@ import { leftHandFrame } from "./frames/left-hand.frame";
 import { rightHandFrame } from "./frames/right-hand.frame";
 import { fallFrame } from "./frames/fall.frame";
 import { moveFrame } from "./frames/move.frame";
+import { AudioController } from "./controllers/audio.controller";
+import { equalizerFrame } from "./frames/equalizer.frame";
+import { equalizer, equalizerLeft } from "./components/equalizer";
 
 scene.add(ground);
 scene.add(directionalLight);
 scene.add(head, leftHand, rightHand);
 scene.add(ladder);
+scene.add(equalizer, equalizerLeft);
 
 const setAnimationLoop = () => {
   renderer.setAnimationLoop(() => {
     leftHandFrame();
     rightHandFrame();
     moveFrame(keyboardController);
-    ladder.rotation.y -= 0.001;
 
+    const uint8 = audioController.getFrequency();
+    const max = Math.max(...uint8);
+    if (max > 170) {
+      ladder.rotation.y += max / 7000;
+    } else {
+      ladder.rotation.y -= max / 7000;
+    }
+    // const min = Math.min(...uint8);
+    // const scale = Math.max(1, min / 64);
+    // ladder.scale.set(scale, 1, scale);
+    equalizerFrame(uint8);
     renderer.render(scene, camera);
   });
 };
@@ -38,8 +52,10 @@ const xrController = new XrController(renderer);
 const lockController = new LockController(xrController, renderer);
 const mouseController = new MouseController(head);
 const keyboardController = new KeyboardController();
+const audioController = new AudioController();
 const webController = new WebController(
   xrController,
   lockController,
+  audioController,
   setAnimationLoop
 );

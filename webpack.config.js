@@ -14,6 +14,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new ForkTsCheckerWebpackPlugin(),
+    // new CopyWebpackPlugin()
   ],
   module: {
     rules: [
@@ -40,5 +41,8 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js"],
+  },
+  output: {
+    publicPath: "/",
   },
 };

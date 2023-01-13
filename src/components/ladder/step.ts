@@ -12,14 +12,14 @@ import { degToRad } from "three/src/math/MathUtils";
 const geometry = new BufferGeometry();
 geometry.setFromPoints([
   new Vector2(0, 0),
-  new Vector2(2, 20),
-  new Vector2(4, 0),
+  new Vector2(5, 50),
+  new Vector2(10, 0),
 ]);
 const material = new MeshLambertMaterial({
   side: BackSide,
 });
 const mesh = new Mesh(geometry, material);
-mesh.translateX(21);
+mesh.translateX(56);
 mesh.rotation.z = degToRad(90);
 mesh.castShadow = true;
 

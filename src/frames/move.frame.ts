@@ -8,5 +8,5 @@ export const moveFrame = (keyboardController: KeyboardController) => {
   euler.setFromQuaternion(head.quaternion, "YXZ");
   euler.x = 0;
   direction.applyEuler(euler);
-  head.position.addScaledVector(direction, 0.1);
+  head.position.addScaledVector(direction, 0.5);
 };

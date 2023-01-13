@@ -19,7 +19,7 @@ class Ladder {
 
 export const ladder = new Group();
 ladder.position.y = 2;
-ladder.position.z = -20;
+ladder.position.z = -10;
 ladder.rotateZ(degToRad(90));
 ladder.rotateX(degToRad(-90));
 ladder.add(...new Ladder().steps);
