@@ -40,12 +40,11 @@ export const animation = () => {
     const time = audioController.getTime();
     boxesFrame(time);
     const uint8 = audioController.getFrequency();
-    // const max = Math.max(...uint8);
-    // const min = Math.min(...uint8);
-    // const diff = max - min;
+    const max = Math.max(...uint8);
+    const min = Math.min(...uint8);
+    const diff = max - min;
     const hv3 = renderer.xr.getCamera().position;
     equalizerV3Frame(uint8, hv3);
-    // equalizerV3.rotation.z += 0.01;
 
     /* NOT OK */
     // if (Math.floor(time / 1000) % 2 === 0) {
@@ -61,12 +60,12 @@ export const animation = () => {
     // }
 
     /* OK */
-    // const even = Math.floor(time / 1000) % 2 === 0;
-    // if (even) {
-    //   ladder.rotation.y += diff / 7000;
-    // } else {
-    //   ladder.rotation.y -= diff / 7000;
-    // }
+    const even = Math.floor(time / 1000) % 2 === 0;
+    if (even) {
+      ladder.rotation.y += diff / 7000;
+    } else {
+      ladder.rotation.y -= diff / 7000;
+    }
     renderer.render(scene, camera);
   });
 };
