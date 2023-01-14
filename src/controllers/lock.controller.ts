@@ -1,9 +1,11 @@
 import { WebGLRenderer } from "three";
 import { XrController } from "./xr.controller";
+import { AudioController } from "./audio.controller";
 
 export class LockController {
   constructor(
     private readonly xrController: XrController,
+    private readonly audioController: AudioController,
     private readonly renderer: WebGLRenderer
   ) {
     document.onpointerlockchange = this.handlePointerLockChange.bind(this);
@@ -23,7 +25,9 @@ export class LockController {
 
   private handlePointerLockChange() {
     if (!document.pointerLockElement) {
+      this.audioController.stop();
       this.xrController.handleExit();
+      this.renderer.dispose();
     }
   }
 }

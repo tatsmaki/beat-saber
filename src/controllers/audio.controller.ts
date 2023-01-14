@@ -4,7 +4,6 @@ export class AudioController {
   private sourceNode: AudioBufferSourceNode | null = null;
   private analyserNode: AnalyserNode | null = null;
   private analyzerUint8: Uint8Array | null = null;
-  private analyzerFloat32: Float32Array | null = null;
 
   handleClick() {
     this.audioContext = new AudioContext();
@@ -21,9 +20,7 @@ export class AudioController {
       smoothingTimeConstant: 1,
     });
     this.analyzerUint8 = new Uint8Array(this.analyserNode.frequencyBinCount);
-    this.analyserNode.getByteTimeDomainData(this.analyzerUint8);
     this.sourceNode.connect(this.analyserNode);
-    // this.analyserNode.connect(this.audioContext.destination);
     this.play();
   }
 
@@ -40,5 +37,9 @@ export class AudioController {
       this.sourceNode.buffer = data;
       this.sourceNode.start();
     }
+  }
+
+  stop() {
+    this.sourceNode!.stop();
   }
 }

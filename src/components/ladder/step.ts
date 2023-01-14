@@ -4,7 +4,6 @@ import {
   Group,
   Mesh,
   MeshBasicMaterial,
-  MeshLambertMaterial,
   Vector2,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils";
@@ -15,8 +14,11 @@ geometry.setFromPoints([
   new Vector2(5, 50),
   new Vector2(10, 0),
 ]);
-const material = new MeshLambertMaterial({
+const material = new MeshBasicMaterial({
   side: BackSide,
+  color: 0xffffff,
+  // transparent: true,
+  // opacity: 0.3,
 });
 const mesh = new Mesh(geometry, material);
 mesh.translateX(56);

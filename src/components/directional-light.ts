@@ -10,7 +10,7 @@ light.shadow.mapSize.width = 1024;
 light.shadow.mapSize.height = 1024;
 
 const light2 = new DirectionalLight("blue", 10);
-light2.position.set(50, 15, -100);
+light2.position.set(50, -15, -100);
 light2.castShadow = true;
 light2.lookAt(0, 0, 0);
 light2.shadow.bias = -0.0001;
