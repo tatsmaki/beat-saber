@@ -1,4 +1,4 @@
-import { Group } from "three";
+import { Color, Group } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 import { step } from "./step";
 
@@ -16,13 +16,13 @@ class Ladder {
     }
   }
 
-  update(direction: boolean) {
-    this.steps.forEach((step) => {
-      // step.rotation.x += 0.01;
-      // step.position.x += 0.01;
-      step.translateX(direction ? -1 : 1);
-    });
-  }
+  // update(direction: boolean) {
+  //   this.steps.forEach((step) => {
+  //     // step.rotation.x += 0.01;
+  //     // step.position.x += 0.01;
+  //     step.translateX(direction ? -1 : 1);
+  //   });
+  // }
 }
 
 export const ladder = new Group();

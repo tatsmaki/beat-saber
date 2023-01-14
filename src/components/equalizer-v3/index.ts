@@ -7,10 +7,10 @@ export const equalizerV3Children: Mesh[] = [];
 
 for (let i = 0; i < 128; i += 1) {
   const mesh = new Mesh(
-    new PlaneGeometry(1, 1),
+    new PlaneGeometry(0.5, 2),
     new MeshLambertMaterial({ color: 0xffffff })
   );
-  mesh.position.z = -i;
+  mesh.position.z = -i / 2;
   mesh.position.x = 5;
   mesh.rotation.y = degToRad(-90);
   equalizerV3Children[i] = mesh;

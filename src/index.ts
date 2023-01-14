@@ -14,7 +14,6 @@ import { rightHand } from "./components/right-hand";
 import { ladder } from "./components/ladder";
 import { AudioController } from "./controllers/audio.controller";
 import { equalizerV3 } from "./components/equalizer-v3";
-import { centerPoint } from "./components/center-point";
 import { leftHandFrame } from "./frames/left-hand.frame";
 import { rightHandFrame } from "./frames/right-hand.frame";
 import { moveFrame } from "./frames/move.frame";
@@ -28,7 +27,6 @@ scene.add(directionalLight);
 scene.add(head, leftHand, rightHand);
 scene.add(ladder);
 scene.add(equalizerV3);
-scene.add(centerPoint);
 scene.add(boxes);
 
 export const animation = () => {
@@ -60,11 +58,13 @@ export const animation = () => {
     // }
 
     /* OK */
-    const even = Math.floor(time / 1000) % 2 === 0;
+    const even = Math.floor(time) % 2 === 0;
     if (even) {
-      ladder.rotation.y += diff / 7000;
+      ladder.rotation.y += diff / 10000;
+      // ladder.scale.y -= diff / 10000;
     } else {
-      ladder.rotation.y -= diff / 7000;
+      ladder.rotation.y -= diff / 10000;
+      // ladder.scale.y += diff / 10000;
     }
     renderer.render(scene, camera);
   });

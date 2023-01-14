@@ -17,8 +17,6 @@ geometry.setFromPoints([
 const material = new MeshBasicMaterial({
   side: BackSide,
   color: 0xffffff,
-  // transparent: true,
-  // opacity: 0.3,
 });
 const mesh = new Mesh(geometry, material);
 mesh.translateX(56);
