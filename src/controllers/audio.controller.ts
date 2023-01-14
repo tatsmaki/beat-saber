@@ -21,12 +21,15 @@ export class AudioController {
     });
     this.analyzerUint8 = new Uint8Array(this.analyserNode.frequencyBinCount);
     this.sourceNode.connect(this.analyserNode);
-    this.play();
   }
 
   getFrequency() {
     this.analyserNode!.getByteTimeDomainData(this.analyzerUint8!);
     return this.analyzerUint8!;
+  }
+
+  getTime() {
+    return this.audioContext!.currentTime;
   }
 
   async play() {

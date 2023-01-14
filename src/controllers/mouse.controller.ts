@@ -1,23 +1,24 @@
-import { Euler, Group } from "three";
+import { Euler } from "three";
+import { head } from "../components/head";
 
 export class MouseController {
   private euler = new Euler(0, 0, 0, "YXZ");
 
-  constructor(private readonly head: Group) {
+  constructor() {
     document.onmousemove = this.handleMouseMove.bind(this);
   }
 
   private handleMouseMove(event: MouseEvent) {
     if (document.pointerLockElement) {
       const { movementX, movementY } = event;
-      this.euler.setFromQuaternion(this.head.quaternion);
+      this.euler.setFromQuaternion(head.quaternion);
       this.euler.y -= movementX * 0.004;
       this.euler.x -= movementY * 0.004;
       this.euler.x = Math.max(
         -Math.PI / 2,
         Math.min(Math.PI / 2, this.euler.x)
       );
-      this.head.quaternion.setFromEuler(this.euler);
+      head.quaternion.setFromEuler(this.euler);
     }
   }
 }

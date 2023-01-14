@@ -1,3 +1,4 @@
+import { boxEmitter } from "../box-emitter";
 import { AudioController } from "./audio.controller";
 import { LockController } from "./lock.controller";
 import { XrController } from "./xr.controller";
@@ -9,15 +10,17 @@ export class WebController {
     private readonly xrController: XrController,
     private readonly lockController: LockController,
     private readonly audioController: AudioController,
-    private readonly setAnimationLoop: () => void
+    private readonly animation: () => void
   ) {
     this.button.onclick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setAnimationLoop();
+  async handleClick() {
     this.xrController.handleClick();
     this.audioController.handleClick();
+    await boxEmitter.load();
+    await this.audioController.play();
+    this.animation();
     setTimeout(() => this.lockController.handleClick(), 500);
   }
 }

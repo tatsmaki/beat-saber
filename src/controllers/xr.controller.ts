@@ -1,9 +1,10 @@
-import { WebGLRenderer } from "three";
+import { renderer } from "../renderer";
+import { AudioController } from "./audio.controller";
 
 export class XrController {
   private session: XRSession | null = null;
 
-  constructor(private readonly renderer: WebGLRenderer) {}
+  constructor(private readonly audioController: AudioController) {}
 
   async handleClick() {
     if (navigator.xr) {
@@ -19,7 +20,7 @@ export class XrController {
         ],
       };
       this.session = await navigator.xr.requestSession(mode, options);
-      await this.renderer.xr.setSession(this.session);
+      await renderer.xr.setSession(this.session);
     }
   }
 
@@ -27,6 +28,8 @@ export class XrController {
     if (this.session) {
       await this.session.end();
       this.session = null;
+      this.audioController.stop();
+      renderer.dispose();
     }
   }
 }

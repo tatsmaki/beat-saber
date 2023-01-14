@@ -16,5 +16,5 @@ for (let i = 0; i < 128; i += 1) {
   equalizerV3Children[i] = mesh;
 }
 
-equalizerV3.position.set(0, -2, 2);
+equalizerV3.position.set(0, 3, 3);
 equalizerV3.add(...equalizerV3Children);

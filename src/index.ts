@@ -5,38 +5,47 @@ import { MouseController } from "./controllers/mouse.controller";
 import { KeyboardController } from "./controllers/keyboard.controller";
 import { WebController } from "./controllers/web.controller";
 import { scene } from "./components/scene";
+import { renderer } from "./renderer";
 import { ground } from "./components/ground";
 import { directionalLight } from "./components/directional-light";
 import { head, camera } from "./components/head";
 import { leftHand } from "./components/left-hand";
 import { rightHand } from "./components/right-hand";
-import { ladder, ladderObject } from "./components/ladder";
-import { renderer } from "./renderer";
-import { leftHandFrame } from "./frames/left-hand.frame";
-import { rightHandFrame } from "./frames/right-hand.frame";
-import { fallFrame } from "./frames/fall.frame";
-import { moveFrame } from "./frames/move.frame";
+import { ladder } from "./components/ladder";
 import { AudioController } from "./controllers/audio.controller";
 import { equalizerV3 } from "./components/equalizer-v3";
+import { centerPoint } from "./components/center-point";
+import { leftHandFrame } from "./frames/left-hand.frame";
+import { rightHandFrame } from "./frames/right-hand.frame";
+import { moveFrame } from "./frames/move.frame";
 import { equalizerV3Frame } from "./frames/equalizer-v3.frame";
+import { boxEmitter } from "./box-emitter";
+import { boxes } from "./components/boxes";
+import { boxesFrame } from "./frames/boxes.frame";
 
 scene.add(ground);
 scene.add(directionalLight);
 scene.add(head, leftHand, rightHand);
 scene.add(ladder);
 scene.add(equalizerV3);
+scene.add(centerPoint);
+scene.add(boxes);
 
-const setAnimationLoop = () => {
-  renderer.setAnimationLoop((time) => {
+export const animation = () => {
+  renderer.setAnimationLoop(() => {
     leftHandFrame();
-    const rhv3 = rightHandFrame();
+    rightHandFrame();
     moveFrame(keyboardController);
 
+    const time = audioController.getTime();
+    boxesFrame(time);
     const uint8 = audioController.getFrequency();
-    const max = Math.max(...uint8);
-    const min = Math.min(...uint8);
-    const diff = max - min;
-    equalizerV3Frame(uint8, rhv3);
+    // const max = Math.max(...uint8);
+    // const min = Math.min(...uint8);
+    // const diff = max - min;
+    const hv3 = renderer.xr.getCamera().position;
+    equalizerV3Frame(uint8, hv3);
+    // equalizerV3.rotation.z += 0.01;
 
     /* NOT OK */
     // if (Math.floor(time / 1000) % 2 === 0) {
@@ -52,28 +61,24 @@ const setAnimationLoop = () => {
     // }
 
     /* OK */
-    const even = Math.floor(time / 1000) % 2 === 0;
-    if (even) {
-      ladder.rotation.y += diff / 7000;
-    } else {
-      ladder.rotation.y -= diff / 7000;
-    }
+    // const even = Math.floor(time / 1000) % 2 === 0;
+    // if (even) {
+    //   ladder.rotation.y += diff / 7000;
+    // } else {
+    //   ladder.rotation.y -= diff / 7000;
+    // }
     renderer.render(scene, camera);
   });
 };
 
-const xrController = new XrController(renderer);
 const audioController = new AudioController();
-const lockController = new LockController(
-  xrController,
-  audioController,
-  renderer
-);
-const mouseController = new MouseController(head);
+const xrController = new XrController(audioController);
+const lockController = new LockController(xrController);
+const mouseController = new MouseController();
 const keyboardController = new KeyboardController();
 const webController = new WebController(
   xrController,
   lockController,
   audioController,
-  setAnimationLoop
+  animation
 );

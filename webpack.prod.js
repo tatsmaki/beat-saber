@@ -18,6 +18,14 @@ module.exports = merge(config, {
           from: "public/audio",
           to: "audio",
         },
+        {
+          from: "public/textures",
+          to: "textures",
+        },
+        {
+          from: "public/json",
+          to: "json",
+        },
       ],
     }),
   ],
