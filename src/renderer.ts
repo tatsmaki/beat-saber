@@ -7,7 +7,6 @@ import {
 
 export const renderer = new WebGLRenderer({
   antialias: true,
-  powerPreference: "high-performance",
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);

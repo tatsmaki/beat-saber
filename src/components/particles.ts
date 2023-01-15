@@ -15,7 +15,7 @@ for (let i = 0; i < count; i += 1) {
 geometry.setAttribute("position", new BufferAttribute(points, 3));
 
 const material = new PointsMaterial({
-  color: 0xffffff,
+  color: 0x005473,
   size: 0.005,
   blending: AdditiveBlending,
   transparent: true,
