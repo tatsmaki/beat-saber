@@ -7,7 +7,7 @@ import {
 } from "three";
 
 const mesh = new Mesh(
-  new BoxGeometry(0.2, 0.2, 0.2),
+  new BoxGeometry(0.4, 0.4, 0.4),
   new MeshBasicMaterial({ color: 0xffffff })
 );
 

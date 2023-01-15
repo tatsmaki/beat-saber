@@ -7,7 +7,6 @@ import {
 
 export const renderer = new WebGLRenderer({
   antialias: true,
-  alpha: true,
   powerPreference: "high-performance",
 });
 

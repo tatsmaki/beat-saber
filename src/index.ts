@@ -21,6 +21,8 @@ import { equalizerV3Frame } from "./frames/equalizer-v3.frame";
 import { boxEmitter } from "./box-emitter";
 import { boxes } from "./components/boxes";
 import { boxesFrame } from "./frames/boxes.frame";
+import { particles } from "./components/particles";
+import { particlesFrame } from "./frames/particles.frame";
 
 scene.add(ground);
 scene.add(directionalLight);
@@ -28,12 +30,15 @@ scene.add(head, leftHand, rightHand);
 scene.add(ladder);
 scene.add(equalizerV3);
 scene.add(boxes);
+scene.add(particles);
 
 export const animation = () => {
   renderer.setAnimationLoop(() => {
     leftHandFrame();
     rightHandFrame();
     moveFrame(keyboardController);
+
+    particlesFrame();
 
     const time = audioController.getTime();
     boxesFrame(time);
@@ -44,27 +49,12 @@ export const animation = () => {
     const hv3 = renderer.xr.getCamera().position;
     equalizerV3Frame(uint8, hv3);
 
-    /* NOT OK */
-    // if (Math.floor(time / 1000) % 2 === 0) {
-    //   ladder.position.z += diff / 100;
-    // } else {
-    //   ladder.position.z -= diff / 100;
-    // }
-
-    // if (max > 170) {
-    //   ladder.rotation.y += max / 7000;
-    // } else {
-    //   ladder.rotation.y -= max / 7000;
-    // }
-
     /* OK */
     const even = Math.floor(time) % 2 === 0;
     if (even) {
       ladder.rotation.y += diff / 10000;
-      // ladder.scale.y -= diff / 10000;
     } else {
       ladder.rotation.y -= diff / 10000;
-      // ladder.scale.y += diff / 10000;
     }
     renderer.render(scene, camera);
   });

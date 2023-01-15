@@ -16,12 +16,12 @@ geometry.setFromPoints([
 ]);
 const material = new MeshBasicMaterial({
   side: BackSide,
-  color: 0xffffff,
+  color: 0x121212,
 });
 const mesh = new Mesh(geometry, material);
 mesh.translateX(56);
 mesh.rotation.z = degToRad(90);
-mesh.castShadow = true;
+// mesh.castShadow = true;
 
 export const step = new Group();
 step.add(mesh);
