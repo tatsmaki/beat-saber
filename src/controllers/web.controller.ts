@@ -8,7 +8,7 @@ export class WebController {
 
   constructor(
     private readonly xrController: XrController,
-    private readonly lockController: LockController,
+    // private readonly lockController: LockController,
     private readonly audioController: AudioController,
     private readonly animation: () => void
   ) {
@@ -18,9 +18,9 @@ export class WebController {
   async handleClick() {
     this.xrController.handleClick();
     this.audioController.handleClick();
+    this.animation();
     await boxEmitter.load();
     await this.audioController.play();
-    this.animation();
-    setTimeout(() => this.lockController.handleClick(), 500);
+    // setTimeout(() => this.lockController.handleClick(), 500);
   }
 }

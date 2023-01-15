@@ -1,10 +1,4 @@
-import {
-  BoxGeometry,
-  Group,
-  Mesh,
-  MeshBasicMaterial,
-  MeshLambertMaterial,
-} from "three";
+import { BoxGeometry, Group, Mesh, MeshBasicMaterial } from "three";
 
 const mesh = new Mesh(
   new BoxGeometry(0.4, 0.4, 0.4),

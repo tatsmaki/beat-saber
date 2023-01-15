@@ -1,10 +1,4 @@
-import {
-  Group,
-  Mesh,
-  MeshBasicMaterial,
-  MeshLambertMaterial,
-  PlaneGeometry,
-} from "three";
+import { Group, Mesh, MeshBasicMaterial, PlaneGeometry } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
 export const equalizerV3 = new Group();

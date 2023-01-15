@@ -10,7 +10,10 @@ class BoxEmitter {
   }
 
   emit(time: number, createBox: (data: IBox) => void) {
-    const { boxes } = this.song!;
+    if (!this.song) {
+      return;
+    }
+    const { boxes } = this.song;
     if (boxes[0] && boxes[0].t <= time) {
       const data = boxes.shift();
       createBox(data!);
