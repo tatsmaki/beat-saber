@@ -26,7 +26,7 @@ class Ladder {
 }
 
 export const ladder = new Group();
-ladder.position.set(0, 3, 0);
+ladder.position.set(0, 3, -20);
 ladder.rotateZ(degToRad(90));
 ladder.rotateX(degToRad(-90));
 export const ladderObject = new Ladder();

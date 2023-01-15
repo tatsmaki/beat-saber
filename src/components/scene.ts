@@ -1,7 +1,6 @@
-import { Color, Fog, Scene } from "three";
+import { Color, FogExp2, Scene } from "three";
 
 export const scene = new Scene();
 
-// scene.background = new Color(0xb8dbf1); // blue
-scene.background = new Color(0x1a1917); // dark warm
-scene.fog = new Fog(0x1a1917, 1, 60);
+scene.background = new Color(0x0d0217);
+scene.fog = new FogExp2(0x456875, 0.06);

@@ -25,16 +25,16 @@ import { particles } from "./components/particles";
 import { particlesFrame } from "./frames/particles.frame";
 
 scene.add(ground);
-scene.add(directionalLight);
-scene.add(head, leftHand, rightHand);
-scene.add(ladder);
+// scene.add(directionalLight);
+scene.add(head, rightHand);
+// scene.add(ladder);
 scene.add(equalizerV3);
 scene.add(boxes);
 scene.add(particles);
 
 export const animation = () => {
   renderer.setAnimationLoop(() => {
-    leftHandFrame();
+    // leftHandFrame();
     rightHandFrame();
     moveFrame(keyboardController);
 
@@ -50,12 +50,12 @@ export const animation = () => {
     equalizerV3Frame(uint8, hv3);
 
     /* OK */
-    const even = Math.floor(time) % 2 === 0;
-    if (even) {
-      ladder.rotation.y += diff / 10000;
-    } else {
-      ladder.rotation.y -= diff / 10000;
-    }
+    // const even = Math.floor(time) % 2 === 0;
+    // if (even) {
+    //   ladder.rotation.y += diff / 10000;
+    // } else {
+    //   ladder.rotation.y -= diff / 10000;
+    // }
     renderer.render(scene, camera);
   });
 };
