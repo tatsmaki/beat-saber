@@ -8,7 +8,7 @@ export const equalizerV3Children: Mesh[] = [];
 for (let i = 0; i < 128; i += 1) {
   const mesh = new Mesh(
     new PlaneGeometry(1, 0.2),
-    new MeshBasicMaterial({ color: 0x005473, transparent: true, opacity: 0.5 })
+    new MeshBasicMaterial({ color: 0x2164a1 })
   );
   mesh.position.z = -i;
   mesh.position.x = 5;

@@ -12,7 +12,7 @@ export const ground = new Water(geometry, {
   scale: 1,
   textureWidth: 1024,
   textureHeight: 1024,
-  encoding: sRGBEncoding,
+  // encoding: sRGBEncoding,
 });
 
 ground.position.set(0, 0, -62);
