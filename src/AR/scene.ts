@@ -1,5 +1,5 @@
 import { Scene } from "three";
-import { pointLight } from "../point-light";
+import { pointLight } from "./point-light";
 import { camera } from "./camera";
 import { cube } from "./cube";
 

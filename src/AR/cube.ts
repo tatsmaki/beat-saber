@@ -1,6 +1,6 @@
 import { BoxGeometry, Color, Mesh, MeshPhysicalMaterial } from "three";
 
-const geometry = new BoxGeometry(0.5, 0.5);
+const geometry = new BoxGeometry(0.5, 0.5, 0.5);
 const material = new MeshPhysicalMaterial({
   color: 0xffffff,
   emissive: new Color(0xffffff),
