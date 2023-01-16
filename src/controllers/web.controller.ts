@@ -1,26 +1,31 @@
 import { boxEmitter } from "../box-emitter";
 import { AudioController } from "./audio.controller";
-import { LockController } from "./lock.controller";
 import { XrController } from "./xr.controller";
 
 export class WebController {
-  button = document.getElementById("root") as HTMLButtonElement;
+  vrButton = document.getElementById("vr")!;
+  arButton = document.getElementById("ar")!;
 
   constructor(
     private readonly xrController: XrController,
-    // private readonly lockController: LockController,
     private readonly audioController: AudioController,
-    private readonly animation: () => void
+    private readonly vr: () => void,
+    private readonly ar: () => void
   ) {
-    this.button.onclick = this.handleClick.bind(this);
+    this.vrButton.onclick = this.handleClick.bind(this);
+    this.arButton.onclick = this.enterAr.bind(this);
   }
 
   async handleClick() {
     this.audioController.handleClick();
-    this.animation();
-    await this.xrController.handleClick();
+    this.vr();
+    await this.xrController.enterVrSession();
     await boxEmitter.load();
     await this.audioController.play();
-    // setTimeout(() => this.lockController.handleClick(), 500);
+  }
+
+  async enterAr() {
+    this.ar();
+    await this.xrController.enterArSession();
   }
 }

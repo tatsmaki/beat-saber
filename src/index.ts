@@ -19,6 +19,7 @@ import { boxesFrame } from "./frames/boxes.frame";
 import { particles } from "./components/particles";
 import { particlesFrame } from "./frames/particles.frame";
 import { pointLight } from "./point-light";
+import * as AR from "./AR";
 
 scene.add(ground);
 scene.add(head, rightHand);
@@ -27,7 +28,7 @@ scene.add(boxes);
 scene.add(particles);
 scene.add(pointLight);
 
-const animation = () => {
+const vr = () => {
   renderer.setAnimationLoop(() => {
     rightHandFrame();
     moveFrame(keyboardController);
@@ -44,14 +45,16 @@ const animation = () => {
   });
 };
 
+const ar = () => {
+  renderer.setAnimationLoop(() => {
+    AR.cube.rotation.z += 0.001;
+    renderer.render(AR.scene, AR.camera);
+  });
+};
+
 const audioController = new AudioController();
 const xrController = new XrController(audioController);
 // const lockController = new LockController(xrController);
 const mouseController = new MouseController();
 const keyboardController = new KeyboardController();
-const webController = new WebController(
-  xrController,
-  // lockController,
-  audioController,
-  animation
-);
+const webController = new WebController(xrController, audioController, vr, ar);
