@@ -46,6 +46,7 @@ const vr = () => {
 };
 
 const ar = () => {
+  renderer.setClearColor(0xffffff, 0);
   renderer.setAnimationLoop(() => {
     AR.cube.rotation.z += 0.001;
     renderer.render(AR.scene, AR.camera);

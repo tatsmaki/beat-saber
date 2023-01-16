@@ -22,10 +22,12 @@ export class XrController {
 
   async enterArSession() {
     if (navigator.xr) {
-      const mode = "immersive-ar";
+      const mode = "immersive-vr";
       const options = {
         optionalFeatures: ["local", "local-floor", "viewer"],
       };
+      const supported = await navigator.xr.isSessionSupported(mode);
+      // console.log(supported);
       this.session = await navigator.xr.requestSession(mode, options);
       await renderer.xr.setSession(this.session);
       this.session.onend = this.onSessionEnd;

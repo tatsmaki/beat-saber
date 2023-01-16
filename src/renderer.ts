@@ -2,6 +2,7 @@ import { PCFSoftShadowMap, WebGLRenderer, ReinhardToneMapping } from "three";
 
 export const renderer = new WebGLRenderer({
   antialias: true,
+  alpha: true,
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
