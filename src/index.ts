@@ -27,7 +27,7 @@ scene.add(boxes);
 scene.add(particles);
 scene.add(pointLight);
 
-export const animation = () => {
+const animation = () => {
   renderer.setAnimationLoop(() => {
     rightHandFrame();
     moveFrame(keyboardController);

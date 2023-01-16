@@ -16,9 +16,9 @@ export class WebController {
   }
 
   async handleClick() {
-    this.xrController.handleClick();
     this.audioController.handleClick();
     this.animation();
+    await this.xrController.handleClick();
     await boxEmitter.load();
     await this.audioController.play();
     // setTimeout(() => this.lockController.handleClick(), 500);

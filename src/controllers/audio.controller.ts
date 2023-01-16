@@ -4,6 +4,7 @@ export class AudioController {
   private sourceNode: AudioBufferSourceNode | null = null;
   private analyserNode: AnalyserNode | null = null;
   private analyzerUint8: Uint8Array | null = null;
+  private startTime = 0;
 
   handleClick() {
     this.audioContext = new AudioContext();
@@ -29,7 +30,10 @@ export class AudioController {
   }
 
   getTime() {
-    return this.audioContext!.currentTime;
+    if (!this.startTime) {
+      return 0;
+    }
+    return this.audioContext!.currentTime - this.startTime;
   }
 
   async play() {
@@ -38,7 +42,8 @@ export class AudioController {
     const data = await this.audioContext!.decodeAudioData(buffer);
     if (this.sourceNode) {
       this.sourceNode.buffer = data;
-      this.sourceNode.start();
+      this.startTime = this.audioContext!.currentTime;
+      setTimeout(() => this.sourceNode!.start(), 1500);
     }
   }
 
