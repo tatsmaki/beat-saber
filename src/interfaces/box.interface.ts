@@ -1,7 +1,7 @@
-import { Vector2, Vector3 } from "three";
+import { Vector2 } from "three";
 
 export interface IBox {
-  d: Vector2;
   p: Vector2;
+  d: Vector2;
   t: number;
 }

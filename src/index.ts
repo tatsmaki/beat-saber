@@ -1,6 +1,6 @@
 import "./index.css";
 import { XrController } from "./controllers/xr.controller";
-import { LockController } from "./controllers/lock.controller";
+// import { LockController } from "./controllers/lock.controller";
 import { MouseController } from "./controllers/mouse.controller";
 import { KeyboardController } from "./controllers/keyboard.controller";
 import { WebController } from "./controllers/web.controller";
@@ -18,12 +18,14 @@ import { boxes } from "./components/boxes";
 import { boxesFrame } from "./frames/boxes.frame";
 import { particles } from "./components/particles";
 import { particlesFrame } from "./frames/particles.frame";
+import { pointLight } from "./point-light";
 
 scene.add(ground);
 scene.add(head, rightHand);
 scene.add(equalizerV3);
 scene.add(boxes);
 scene.add(particles);
+scene.add(pointLight);
 
 export const animation = () => {
   renderer.setAnimationLoop(() => {

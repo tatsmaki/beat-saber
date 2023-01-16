@@ -10,3 +10,4 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = PCFSoftShadowMap;
 renderer.xr.enabled = true;
 renderer.toneMapping = ReinhardToneMapping;
+renderer.toneMappingExposure = 1;
