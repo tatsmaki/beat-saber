@@ -1,4 +1,9 @@
-import { PointLight } from "three";
+import { Group, PointLight } from "three";
 
-export const pointLight = new PointLight(0xff0000, 10);
-pointLight.position.set(0, 1, 0);
+const red = new PointLight(0xff0000, 10);
+red.position.set(0, 2, 0);
+const blue = new PointLight(0x0000ff, 10);
+blue.position.set(0, -2, 0);
+
+export const pointLight = new Group();
+pointLight.add(red, blue);
