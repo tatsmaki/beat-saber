@@ -1,6 +1,6 @@
-import { renderer } from "../renderer";
+import { renderer } from "../../renderer";
 import { raycaster } from "../components/raycaster";
-import { scene } from "../components/scene";
+import { scene } from "../scene";
 import { head } from "../components/head";
 
 let velocity = 0;

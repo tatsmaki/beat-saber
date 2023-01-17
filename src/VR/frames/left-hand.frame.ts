@@ -1,4 +1,4 @@
-import { renderer } from "../renderer";
+import { renderer } from "../../renderer";
 import { leftHand } from "../components/left-hand";
 
 export const leftHandFrame = () => {

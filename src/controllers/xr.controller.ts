@@ -8,27 +8,14 @@ export class XrController {
     this.onSessionEnd = this.onSessionEnd.bind(this);
   }
 
-  async enterVrSession() {
+  async startSession(mode: XRSessionMode = "immersive-vr") {
     if (navigator.xr) {
-      const mode = "immersive-vr";
       const options = {
         optionalFeatures: ["local", "local-floor", "viewer"],
       };
       this.session = await navigator.xr.requestSession(mode, options);
-      await renderer.xr.setSession(this.session);
       this.session.onend = this.onSessionEnd;
-    }
-  }
-
-  async enterArSession() {
-    if (navigator.xr) {
-      const mode = "immersive-ar";
-      const options = {
-        optionalFeatures: ["local", "local-floor", "viewer"],
-      };
-      this.session = await navigator.xr.requestSession(mode, options);
       await renderer.xr.setSession(this.session);
-      this.session.onend = this.onSessionEnd;
     }
   }
 

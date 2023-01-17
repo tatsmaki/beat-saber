@@ -1,5 +1,5 @@
-import { renderer } from "../renderer";
-import { XrController } from "./xr.controller";
+import { renderer } from "../../renderer";
+import { XrController } from "../../controllers/xr.controller";
 
 export class LockController {
   constructor(private readonly xrController: XrController) {
