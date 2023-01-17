@@ -22,4 +22,5 @@ export const rightHandFrame = (xrController: XrController) => {
     intersection.object.removeFromParent();
     xrController.makePulse();
   }
+  xrController.makePulse();
 };
