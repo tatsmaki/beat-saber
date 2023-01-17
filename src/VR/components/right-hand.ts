@@ -11,7 +11,7 @@ const geometry = new CylinderGeometry(0.015, 0.015, 1);
 const material = new MeshStandardMaterial({
   color: 0x2164a1,
   emissive: new Color(0x2164a1),
-  emissiveIntensity: 5,
+  emissiveIntensity: 10,
 });
 const mesh = new Mesh(geometry, material);
 mesh.translateZ(-0.44);

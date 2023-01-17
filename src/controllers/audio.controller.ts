@@ -48,6 +48,7 @@ export class AudioController {
   }
 
   stop() {
-    this.sourceNode!.stop();
+    this.gainNode!.gain.linearRampToValueAtTime(0, 1);
+    this.sourceNode!.stop(1);
   }
 }

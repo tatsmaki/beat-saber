@@ -28,7 +28,6 @@ export class XrController {
   async handleExit() {
     if (this.session) {
       await this.session.end();
-      this.onSessionEnd();
     }
   }
 }
