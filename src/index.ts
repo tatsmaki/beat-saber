@@ -8,7 +8,7 @@ import { WebController } from "./controllers/web.controller";
 const vr = () => {
   const keyboardController = new VR.KeyboardController();
   renderer.setAnimationLoop(() => {
-    VR.rightHandFrame();
+    VR.rightHandFrame(xrController);
     VR.moveFrame(keyboardController);
 
     VR.particlesFrame();

@@ -30,4 +30,12 @@ export class XrController {
       await this.session.end();
     }
   }
+
+  makePulse() {
+    if (this.session) {
+      const [controller] = this.session.inputSources;
+      // @ts-ignore
+      controller.gamepad?.hapticActuators[0].pulse(0.8, 100);
+    }
+  }
 }
