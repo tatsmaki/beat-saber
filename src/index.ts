@@ -47,6 +47,7 @@ const vr = () => {
 
 const ar = () => {
   renderer.setClearColor(0xffffff, 0);
+  new AR.MouseController();
   renderer.setAnimationLoop(() => {
     AR.cube.rotation.z += 0.002;
     renderer.render(AR.scene, AR.camera);
