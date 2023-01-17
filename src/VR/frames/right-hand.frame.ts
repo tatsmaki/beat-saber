@@ -15,7 +15,7 @@ export const rightHandFrame = (xrController: XrController) => {
 
   matrix4.identity().extractRotation(matrixWorld);
   raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
-  raycaster.ray.direction.set(0, 0, -1).applyMatrix4(matrix4);
+  raycaster.ray.direction.applyMatrix4(matrix4);
   const [intersection] = raycaster.intersectObject(boxes, true);
 
   if (intersection) {
