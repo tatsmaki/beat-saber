@@ -13,7 +13,7 @@ for (let i = 0; i < 128; i += 1) {
       emissive: new Color(0x2164a1),
       emissiveIntensity: 2,
       transparent: true,
-      opacity: 0.1,
+      opacity: 0.2,
     })
   );
   mesh.position.z = -i;

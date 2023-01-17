@@ -1,4 +1,4 @@
-import { Vector2 } from "three";
+import { Vector2, Vector3 } from "three";
 import { boxEmitter } from "../box-emitter";
 import { box } from "../components/box";
 import { boxes } from "../components/boxes";
@@ -15,10 +15,18 @@ const createBox = ({ p, d }: IBox) => {
   boxes.add(newBox);
 };
 
-const boxSpeed = 0.3;
+const boxSpeed = 0.4;
 
 export const boxesFrame = (time: number) => {
   boxEmitter.emit(time, createBox);
   boxesOffset += boxSpeed;
   boxes.position.z += boxSpeed;
+  if (boxes.children.length) {
+    for (let i = 0; i < boxes.children.length; i += 1) {
+      const box = boxes.children[i];
+      if (box.getWorldPosition(new Vector3()).z > 10) {
+        box.removeFromParent();
+      }
+    }
+  }
 };
