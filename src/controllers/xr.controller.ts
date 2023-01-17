@@ -34,10 +34,14 @@ export class XrController {
   makePulse() {
     if (this.session) {
       const sources = this.session.inputSources;
-      const gamepad = sources[0].gamepad;
-      const hapticActuator = gamepad?.hapticActuators?.[0];
-      //@ts-ignore
-      hapticActuator?.pulse(0.8, 100);
+      for (let i = 0; i < sources.length; i += 1) {
+        const source = sources[i];
+        if (source.handedness === "right") {
+          const hapticActuator = source.gamepad!.hapticActuators[0];
+          //@ts-ignore
+          hapticActuator?.pulse(1, 300);
+        }
+      }
     }
   }
 }

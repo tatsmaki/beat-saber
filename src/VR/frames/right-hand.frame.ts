@@ -1,4 +1,4 @@
-import { Matrix4 } from "three";
+import { Matrix4, Vector3 } from "three";
 import { XrController } from "../../controllers/xr.controller";
 import { renderer } from "../../renderer";
 import { boxes } from "../components/boxes";
@@ -13,13 +13,19 @@ export const rightHandFrame = (xrController: XrController) => {
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
-  matrix4.identity().extractRotation(matrixWorld);
-  raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
-  raycaster.ray.direction.applyMatrix4(matrix4);
-  const [intersection] = raycaster.intersectObject(boxes, true);
+  boxes.children.forEach((box) => {
+    if (box.getWorldPosition(new Vector3()).distanceTo(position) < 0.5) {
+      box.removeFromParent();
+      xrController.makePulse();
+    }
+  });
+  // matrix4.identity().extractRotation(matrixWorld);
+  // raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
+  // raycaster.ray.direction.applyMatrix4(matrix4);
+  // const [intersection] = raycaster.intersectObject(boxes, true);
 
-  if (intersection) {
-    intersection.object.removeFromParent();
-    xrController.makePulse();
-  }
+  // if (intersection) {
+  //   intersection.object.removeFromParent();
+  //   xrController.makePulse();
+  // }
 };

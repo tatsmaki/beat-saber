@@ -19,8 +19,5 @@ export class WebController {
     await this.xrController.startSession();
     await boxEmitter.load();
     await this.audioController.play();
-    setInterval(() => {
-      this.xrController.makePulse();
-    }, 2000);
   }
 }
