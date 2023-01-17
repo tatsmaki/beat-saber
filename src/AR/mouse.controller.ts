@@ -24,11 +24,14 @@ export class MouseController {
       const camera = renderer.xr.getCamera();
       raycaster.setFromCamera(new Vector2(x, y), camera);
       const [intersection] = raycaster.intersectObject(cube);
-      if (intersection) {
-        const position = raycaster.ray.origin.add(raycaster.ray.direction);
-        cube.position.x = position.x;
-        cube.position.y = -position.y;
-      }
+      // if (intersection) {
+      const position = raycaster.ray.origin.add(
+        raycaster.ray.direction.normalize()
+      );
+      cube.position.x = position.x;
+      cube.position.y = -position.y;
+      cube.position.y = position.z;
+      // }
     }
   }
 
