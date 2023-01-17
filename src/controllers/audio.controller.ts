@@ -43,7 +43,7 @@ export class AudioController {
     if (this.sourceNode) {
       this.sourceNode.buffer = data;
       this.startTime = this.audioContext!.currentTime;
-      setTimeout(() => this.sourceNode!.start(), 1500);
+      setTimeout(() => this.sourceNode!.start(), 2000);
     }
   }
 

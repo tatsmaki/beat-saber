@@ -3,12 +3,12 @@ import {
   CylinderGeometry,
   Group,
   Mesh,
-  MeshPhysicalMaterial,
+  MeshStandardMaterial,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
 const geometry = new CylinderGeometry(0.015, 0.015, 1);
-const material = new MeshPhysicalMaterial({
+const material = new MeshStandardMaterial({
   color: 0x2164a1,
   emissive: new Color(0x2164a1),
   emissiveIntensity: 5,

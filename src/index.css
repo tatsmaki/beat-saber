@@ -5,23 +5,40 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #042036;
+  perspective: 500px;
+  perspective-origin: center 40vh;
 }
 
 #vr {
   width: 120px;
-  height: 120px;
-  border-radius: 0;
   border: none;
+  outline: none;
   cursor: pointer;
-  border-radius: 50%;
-  margin-right: 20px;
+  transform-style: preserve-3d;
+  background: none;
+  transition: transform 1s;
+}
+#vr:hover {
+  transform: translateZ(80px);
 }
 
-#ar {
+.side {
+  position: absolute;
   width: 120px;
   height: 120px;
-  border-radius: 0;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
+}
+
+.top {
+  transform: translateY(-60px) rotateX(90deg);
+  background: #345e74;
+}
+
+.front {
+  transform: translateZ(60px);
+  background: #56839b;
+  box-shadow: 0 2px 5px #080e13;
+}
+
+svg {
+  transform: translateZ(65px);
 }
