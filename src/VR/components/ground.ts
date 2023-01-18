@@ -1,4 +1,4 @@
-import { MeshBasicMaterial, PlaneGeometry } from "three";
+import { PlaneGeometry } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 import { Water } from "three/examples/jsm/objects/Water2";
 
@@ -6,7 +6,7 @@ const geometry = new PlaneGeometry(3, 128);
 
 export const ground = new Water(geometry, {
   color: 0xffffff,
-  scale: 2,
+  scale: 1,
   textureWidth: 512,
   textureHeight: 512,
 });
