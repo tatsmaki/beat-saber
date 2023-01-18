@@ -6,3 +6,4 @@ export { moveFrame } from "./frames/move.frame";
 export { equalizerFrame } from "./frames/equalizer.frame";
 export { boxesFrame } from "./frames/boxes.frame";
 export { particlesFrame } from "./frames/particles.frame";
+export { displayFrame } from "./frames/display.frame";

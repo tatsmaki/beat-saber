@@ -2,6 +2,7 @@ import { Vector2, Vector3 } from "three";
 import { boxEmitter } from "../box-emitter";
 import { box } from "../components/box";
 import { boxes } from "../components/boxes";
+import { STATE } from "../components/display";
 import { IBox } from "../interfaces/box.interface";
 
 let boxesOffset = 0;
@@ -27,6 +28,7 @@ export const boxesFrame = (time: number, diff: number) => {
       const box = boxes.children[i];
       if (box.getWorldPosition(new Vector3()).z > 10) {
         box.removeFromParent();
+        STATE.multiply = 1;
       }
     }
   }

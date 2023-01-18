@@ -27,7 +27,7 @@ const vr = () => {
     } else {
       ladder.rotation.y -= diff / 50000;
     }
-
+    VR.displayFrame();
     renderer.render(VR.scene, VR.camera);
   });
 };

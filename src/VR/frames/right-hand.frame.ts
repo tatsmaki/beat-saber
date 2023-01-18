@@ -2,12 +2,11 @@ import { Matrix4, Vector2, Vector3 } from "three";
 import { XrController } from "../../controllers/xr.controller";
 import { renderer } from "../../renderer";
 import { boxes } from "../components/boxes";
-import { context, texture } from "../components/display";
+import { STATE } from "../components/display";
 import { raycaster } from "../components/raycaster";
 import { rightHand } from "../components/right-hand";
 
 const matrix4 = new Matrix4();
-let score = 0;
 
 export const rightHandFrame = (xrController: XrController) => {
   const rightControllerGrip = renderer.xr.getControllerGrip(1);
@@ -33,11 +32,9 @@ export const rightHandFrame = (xrController: XrController) => {
     if (distance < 1.3 && angle < 0.4) {
       box.removeFromParent();
       xrController.makePulse();
-      context.fillStyle = "#fff";
-      context.fillRect(0, 0, 200, 100);
-      context.fillStyle = "#000";
-      context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
-      texture.needsUpdate = true;
+      const points = 1 * STATE.multiply;
+      STATE.score += points;
+      STATE.multiply = Math.min(8, STATE.multiply * 2);
     }
   });
   // }
