@@ -1,7 +1,7 @@
 import { Quaternion, Vector3 } from "three";
 import { equalizer, equalizerChildren } from "../components/equalizer";
 
-const rv3 = new Vector3(0, 1.6, 0);
+const rv3 = new Vector3(0, 1.55, 0);
 const za = new Vector3(0, 0, 1);
 
 export const equalizerFrame = (uint8: Uint8Array, hv3: Vector3) => {
