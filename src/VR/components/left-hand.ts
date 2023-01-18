@@ -14,7 +14,7 @@ const material = new MeshStandardMaterial({
   emissiveIntensity: 10,
 });
 const mesh = new Mesh(geometry, material);
-mesh.translateZ(-0.74);
+mesh.translateZ(-0.7);
 mesh.rotateX(degToRad(90));
 
 export const leftHand = new Group();
