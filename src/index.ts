@@ -23,9 +23,9 @@ const vr = () => {
     const hv3 = renderer.xr.getCamera().position;
     VR.equalizerFrame(uint8, hv3);
     if (time % 2 > 1) {
-      ladder.rotation.y += diff / 100000;
+      ladder.rotation.y += diff / 50000;
     } else {
-      ladder.rotation.y -= diff / 100000;
+      ladder.rotation.y -= diff / 50000;
     }
 
     renderer.render(VR.scene, VR.camera);
