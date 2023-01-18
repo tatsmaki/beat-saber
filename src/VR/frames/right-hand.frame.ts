@@ -29,7 +29,7 @@ export const rightHandFrame = (xrController: XrController) => {
     );
     const angle = Math.abs(direction.angle() - boxDirection.angle());
     const distance = box.getWorldPosition(new Vector3()).distanceTo(position);
-    if (distance < 1.3 && angle < 0.4) {
+    if (distance < 1.4 && angle < 0.5) {
       box.removeFromParent();
       xrController.makePulse();
       const points = 1 * STATE.multiply;

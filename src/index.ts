@@ -10,6 +10,7 @@ const vr = () => {
   const keyboardController = new VR.KeyboardController();
   renderer.setAnimationLoop((t) => {
     VR.rightHandFrame(xrController);
+    VR.leftHandFrame();
     VR.moveFrame(keyboardController);
 
     VR.particlesFrame();

@@ -3,23 +3,19 @@ import {
   CylinderGeometry,
   Group,
   Mesh,
-  MeshLambertMaterial,
+  MeshStandardMaterial,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
-const grip = new Mesh(
-  new CylinderGeometry(0.02, 0.02, 0.2),
-  new MeshLambertMaterial({ color: 0x99191a })
-);
-grip.rotateX(degToRad(90));
-
-// const blade = new Mesh(
-//   new CylinderGeometry(0.02, 0.02, 1),
-//   new MeshLambertMaterial({ color: "blue", emissive: new Color("blue") })
-// );
-// blade.translateZ(-0.5);
-// blade.rotateX(degToRad(90));
+const geometry = new CylinderGeometry(0.015, 0.015, 1.4);
+const material = new MeshStandardMaterial({
+  color: 0xff0000,
+  emissive: new Color(0xff0000),
+  emissiveIntensity: 10,
+});
+const mesh = new Mesh(geometry, material);
+mesh.translateZ(-0.74);
+mesh.rotateX(degToRad(90));
 
 export const leftHand = new Group();
-leftHand.add(grip);
-// leftHand.add(blade);
+leftHand.add(mesh);
