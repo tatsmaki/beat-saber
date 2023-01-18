@@ -20,6 +20,6 @@ export const equalizerFrame = (uint8: Uint8Array, hv3: Vector3) => {
     new Quaternion()
       .setFromEuler(equalizer.rotation)
       .setFromAxisAngle(za, angle),
-    0.01
+    0.1
   );
 };
