@@ -2,6 +2,7 @@ import { Matrix4, Vector2, Vector3 } from "three";
 import { XrController } from "../../controllers/xr.controller";
 import { renderer } from "../../renderer";
 import { boxes } from "../components/boxes";
+import { context, texture } from "../components/display";
 import { raycaster } from "../components/raycaster";
 import { rightHand } from "../components/right-hand";
 
@@ -14,9 +15,20 @@ export const rightHandFrame = (xrController: XrController) => {
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
+  const direction = new Vector2(
+    angularVelocity.x,
+    angularVelocity.y
+  ).normalize();
+
+  context.fillStyle = "#fff";
+  context.fillRect(0, 0, 200, 100);
+  context.fillStyle = "#000";
+  context.fillText(JSON.stringify(direction), 10, 60, 200);
+  texture.needsUpdate = true;
+
   boxes.children.forEach((box) => {
     const isNear = box.getWorldPosition(new Vector3()).distanceTo(position) < 1;
-    // const direction = new Vector2(angularVelocity.x, angularVelocity.y);
+
     // const boxDirection = new Vector2(
     //   box.userData.d.x || 0,
     //   box.userData.d.y || 0

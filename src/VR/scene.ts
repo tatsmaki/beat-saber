@@ -1,5 +1,6 @@
 import { Color, FogExp2, Scene } from "three";
 import { boxes } from "./components/boxes";
+import { display } from "./components/display";
 import { equalizer } from "./components/equalizer";
 import { ground } from "./components/ground";
 import { head } from "./components/head";
@@ -19,3 +20,4 @@ scene.add(boxes);
 scene.add(particles);
 scene.add(pointLight);
 scene.add(ladder);
+scene.add(display);
