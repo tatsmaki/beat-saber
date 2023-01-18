@@ -7,6 +7,7 @@ import { raycaster } from "../components/raycaster";
 import { rightHand } from "../components/right-hand";
 
 const matrix4 = new Matrix4();
+let score = 0;
 
 export const rightHandFrame = (xrController: XrController) => {
   const rightControllerGrip = renderer.xr.getControllerGrip(1);
@@ -23,15 +24,15 @@ export const rightHandFrame = (xrController: XrController) => {
       box.userData.d.x || 0,
       box.userData.d.y || 0
     );
+    const angle = Math.abs(direction.angle() - boxDirection.angle());
 
-    if (isNear) {
+    if (isNear && angle < 0.4) {
       box.removeFromParent();
       xrController.makePulse();
-      const angle = Math.abs(direction.angle() - boxDirection.angle());
       context.fillStyle = "#fff";
       context.fillRect(0, 0, 200, 100);
       context.fillStyle = "#000";
-      context.fillText(JSON.stringify(angle), 10, 60, 200);
+      context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
       texture.needsUpdate = true;
     }
   });
