@@ -11,7 +11,7 @@ class BoxEmitter {
     this.song = await response.json();
   }
 
-  emit(time: number, createBox: (data: IBox) => void) {
+  emit(time: number, diff: number, createBox: (data: IBox) => void) {
     if (!this.song) {
       return;
     }
@@ -21,7 +21,10 @@ class BoxEmitter {
       createBox(data!);
       this.lastEmit = time;
     }
-    if (!boxes.length && this.lastEmit + 0.5 < time) {
+    if (
+      !boxes.length &&
+      this.lastEmit + Math.min(0.5, Math.max(1, diff / 100)) < time
+    ) {
       const px = Math.random() * 2 - 1;
       const py = Math.random() - 0.3;
       const dx = Math.random() * 3 - 1;

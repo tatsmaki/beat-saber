@@ -4,20 +4,29 @@ import * as VR from "./VR";
 import { AudioController } from "./controllers/audio.controller";
 import { XrController } from "./controllers/xr.controller";
 import { WebController } from "./controllers/web.controller";
+import { ladder } from "./VR/components/ladder";
 
 const vr = () => {
   const keyboardController = new VR.KeyboardController();
-  renderer.setAnimationLoop(() => {
+  renderer.setAnimationLoop((t) => {
     VR.rightHandFrame(xrController);
     VR.moveFrame(keyboardController);
 
     VR.particlesFrame();
 
     const time = audioController.getTime();
-    VR.boxesFrame(time);
     const uint8 = audioController.getFrequency();
+    const max = Math.max(...uint8);
+    const min = Math.min(...uint8);
+    const diff = max - min;
+    VR.boxesFrame(time, diff);
     const hv3 = renderer.xr.getCamera().position;
     VR.equalizerFrame(uint8, hv3);
+    if (time % 2 > 1) {
+      ladder.rotation.y += diff / 100000;
+    } else {
+      ladder.rotation.y -= diff / 100000;
+    }
 
     renderer.render(VR.scene, VR.camera);
   });

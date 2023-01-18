@@ -15,8 +15,7 @@ export const rightHandFrame = (xrController: XrController) => {
   rightHand.rotation.copy(rotation);
 
   boxes.children.forEach((box) => {
-    const isNear =
-      box.getWorldPosition(new Vector3()).distanceTo(position) < 0.5;
+    const isNear = box.getWorldPosition(new Vector3()).distanceTo(position) < 1;
     // const direction = new Vector2(angularVelocity.x, angularVelocity.y);
     // const boxDirection = new Vector2(
     //   box.userData.d.x || 0,

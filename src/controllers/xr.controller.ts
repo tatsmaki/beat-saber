@@ -37,7 +37,7 @@ export class XrController {
       for (let i = 0; i < sources.length; i += 1) {
         const source = sources[i];
         if (source.handedness === "right") {
-          const hapticActuator = source.gamepad!.hapticActuators[0];
+          const hapticActuator = source.gamepad!.hapticActuators?.[0];
           //@ts-ignore
           hapticActuator?.pulse(1, 300);
         }

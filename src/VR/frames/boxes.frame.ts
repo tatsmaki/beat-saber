@@ -18,8 +18,8 @@ const createBox = ({ p, d }: IBox) => {
 
 const boxSpeed = 0.4;
 
-export const boxesFrame = (time: number) => {
-  boxEmitter.emit(time, createBox);
+export const boxesFrame = (time: number, diff: number) => {
+  boxEmitter.emit(time, diff, createBox);
   boxesOffset += boxSpeed;
   boxes.position.z += boxSpeed;
   if (boxes.children.length) {
