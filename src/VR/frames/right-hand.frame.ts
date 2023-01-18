@@ -15,29 +15,30 @@ export const rightHandFrame = (xrController: XrController) => {
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
-  const { matrixWorld } = rightHand.children[0];
-  matrix4.identity().extractRotation(matrixWorld);
-  raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
-  raycaster.ray.direction.set(0, 0, -1).applyMatrix4(matrix4);
-  const [intersection] = raycaster.intersectObject(boxes, true);
+  // const { matrixWorld } = rightHand.children[0];
+  // matrix4.identity().extractRotation(matrixWorld);
+  // raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
+  // raycaster.ray.direction.set(0, 0, -1).applyMatrix4(matrix4);
+  // const [intersection] = raycaster.intersectObject(boxes, true);
 
-  if (intersection?.distance < 2) {
-    const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
-    boxes.children.forEach((box) => {
-      const boxDirection = new Vector2(
-        box.userData.d.x || 0,
-        box.userData.d.y || 0
-      );
-      const angle = Math.abs(direction.angle() - boxDirection.angle());
-      if (angle < 0.4) {
-        box.removeFromParent();
-        xrController.makePulse();
-        context.fillStyle = "#fff";
-        context.fillRect(0, 0, 200, 100);
-        context.fillStyle = "#000";
-        context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
-        texture.needsUpdate = true;
-      }
-    });
-  }
+  // if (intersection?.distance < 2) {
+  const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
+  boxes.children.forEach((box) => {
+    const boxDirection = new Vector2(
+      box.userData.d.x || 0,
+      box.userData.d.y || 0
+    );
+    const angle = Math.abs(direction.angle() - boxDirection.angle());
+    const distance = box.getWorldPosition(new Vector3()).distanceTo(position);
+    if (distance < 1.3 && angle < 0.4) {
+      box.removeFromParent();
+      xrController.makePulse();
+      context.fillStyle = "#fff";
+      context.fillRect(0, 0, 200, 100);
+      context.fillStyle = "#000";
+      context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
+      texture.needsUpdate = true;
+    }
+  });
+  // }
 };

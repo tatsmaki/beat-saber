@@ -7,7 +7,7 @@ import {
 } from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
-const geometry = new CylinderGeometry(0.015, 0.015, 1.5);
+const geometry = new CylinderGeometry(0.015, 0.015, 1.4);
 const material = new MeshStandardMaterial({
   color: 0x2164a1,
   emissive: new Color(0x2164a1),
