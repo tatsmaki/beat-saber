@@ -9,12 +9,19 @@ const matrix4 = new Matrix4();
 
 export const rightHandFrame = (xrController: XrController) => {
   const rightControllerGrip = renderer.xr.getControllerGrip(1);
-  const { position, rotation, matrixWorld } = rightControllerGrip;
+  const { position, rotation, matrixWorld, angularVelocity } =
+    rightControllerGrip;
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
   boxes.children.forEach((box) => {
-    if (box.getWorldPosition(new Vector3()).distanceTo(position) < 0.5) {
+    const isNear =
+      box.getWorldPosition(new Vector3()).distanceTo(position) < 0.5;
+    const direction = new Vector3(angularVelocity.x, angularVelocity.y);
+    const angle = direction.angleTo(
+      new Vector3(box.userData.d.x || 0, -box.userData.d.y || 0)
+    );
+    if (isNear && Math.abs(angle) < 0.3) {
       box.removeFromParent();
       xrController.makePulse();
     }

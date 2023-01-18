@@ -10,8 +10,9 @@ const createBox = ({ p, d }: IBox) => {
   const newBox = box.clone();
   newBox.position.set(p.x, p.y, -boxesOffset);
   if (d) {
-    newBox.rotation.z = new Vector2(d.x, d.y).angle();
+    newBox.rotation.z = Math.atan2(d.x || 0, -d.y || 0);
   }
+  newBox.userData = { d };
   boxes.add(newBox);
 };
 
