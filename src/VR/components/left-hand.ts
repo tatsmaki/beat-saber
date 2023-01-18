@@ -9,8 +9,8 @@ import { degToRad } from "three/src/math/MathUtils";
 
 const geometry = new CylinderGeometry(0.015, 0.015, 1.4);
 const material = new MeshStandardMaterial({
-  color: 0xff0000,
-  emissive: new Color(0xff0000),
+  color: 0x5e0909,
+  emissive: new Color(0x5e0909),
   emissiveIntensity: 10,
 });
 const mesh = new Mesh(geometry, material);
