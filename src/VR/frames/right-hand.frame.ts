@@ -17,23 +17,22 @@ export const rightHandFrame = (xrController: XrController) => {
 
   const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
 
-  context.fillStyle = "#fff";
-  context.fillRect(0, 0, 200, 100);
-  context.fillStyle = "#000";
-  context.fillText(JSON.stringify(direction), 10, 60, 200);
-  texture.needsUpdate = true;
-
   boxes.children.forEach((box) => {
     const isNear = box.getWorldPosition(new Vector3()).distanceTo(position) < 1;
+    const boxDirection = new Vector2(
+      box.userData.d.x || 0,
+      box.userData.d.y || 0
+    );
 
-    // const boxDirection = new Vector2(
-    //   box.userData.d.x || 0,
-    //   box.userData.d.y || 0
-    // );
-    // const angle = Math.abs(direction.angle() - boxDirection.angle());
     if (isNear) {
       box.removeFromParent();
       xrController.makePulse();
+      const angle = Math.abs(direction.angle() - boxDirection.angle());
+      context.fillStyle = "#fff";
+      context.fillRect(0, 0, 200, 100);
+      context.fillStyle = "#000";
+      context.fillText(JSON.stringify(angle), 10, 60, 200);
+      texture.needsUpdate = true;
     }
   });
   // matrix4.identity().extractRotation(matrixWorld);
