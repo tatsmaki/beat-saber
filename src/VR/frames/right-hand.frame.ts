@@ -17,13 +17,13 @@ export const rightHandFrame = (xrController: XrController) => {
   boxes.children.forEach((box) => {
     const isNear =
       box.getWorldPosition(new Vector3()).distanceTo(position) < 0.5;
-    const direction = new Vector2(angularVelocity.x, angularVelocity.y);
-    const boxDirection = new Vector2(
-      box.userData.d.x || 0,
-      box.userData.d.y || 0
-    );
-    const angle = Math.abs(direction.angle() - boxDirection.angle());
-    if (isNear && angle < 0.45) {
+    // const direction = new Vector2(angularVelocity.x, angularVelocity.y);
+    // const boxDirection = new Vector2(
+    //   box.userData.d.x || 0,
+    //   box.userData.d.y || 0
+    // );
+    // const angle = Math.abs(direction.angle() - boxDirection.angle());
+    if (isNear) {
       box.removeFromParent();
       xrController.makePulse();
     }

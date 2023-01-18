@@ -10,9 +10,13 @@
     "start": "webpack serve --config webpack.dev.js"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "three": "^0.148.0"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7",
+    "@types/lodash.throttle": "^4.1.7",
     "@types/three": "^0.146.0",
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
