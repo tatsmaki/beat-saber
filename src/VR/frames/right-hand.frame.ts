@@ -11,38 +11,33 @@ let score = 0;
 
 export const rightHandFrame = (xrController: XrController) => {
   const rightControllerGrip = renderer.xr.getControllerGrip(1);
-  const { position, rotation, matrixWorld, angularVelocity } =
-    rightControllerGrip;
+  const { position, rotation, angularVelocity } = rightControllerGrip;
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
-  const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
+  const { matrixWorld } = rightHand.children[0];
+  matrix4.identity().extractRotation(matrixWorld);
+  raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
+  raycaster.ray.direction.set(0, 0, -1).applyMatrix4(matrix4);
+  const [intersection] = raycaster.intersectObject(boxes, true);
 
-  boxes.children.forEach((box) => {
-    const isNear = box.getWorldPosition(new Vector3()).distanceTo(position) < 1;
-    const boxDirection = new Vector2(
-      box.userData.d.x || 0,
-      box.userData.d.y || 0
-    );
-    const angle = Math.abs(direction.angle() - boxDirection.angle());
-
-    if (isNear && angle < 0.4) {
-      box.removeFromParent();
-      xrController.makePulse();
-      context.fillStyle = "#fff";
-      context.fillRect(0, 0, 200, 100);
-      context.fillStyle = "#000";
-      context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
-      texture.needsUpdate = true;
-    }
-  });
-  // matrix4.identity().extractRotation(matrixWorld);
-  // raycaster.ray.origin.setFromMatrixPosition(matrixWorld);
-  // raycaster.ray.direction.applyMatrix4(matrix4);
-  // const [intersection] = raycaster.intersectObject(boxes, true);
-
-  // if (intersection) {
-  //   intersection.object.removeFromParent();
-  //   xrController.makePulse();
-  // }
+  if (intersection?.distance < 2) {
+    const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
+    boxes.children.forEach((box) => {
+      const boxDirection = new Vector2(
+        box.userData.d.x || 0,
+        box.userData.d.y || 0
+      );
+      const angle = Math.abs(direction.angle() - boxDirection.angle());
+      if (angle < 0.4) {
+        box.removeFromParent();
+        xrController.makePulse();
+        context.fillStyle = "#fff";
+        context.fillRect(0, 0, 200, 100);
+        context.fillStyle = "#000";
+        context.fillText(`Score: ${(score += 1)}`, 10, 60, 200);
+        texture.needsUpdate = true;
+      }
+    });
+  }
 };
