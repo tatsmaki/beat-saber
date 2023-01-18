@@ -15,10 +15,7 @@ export const rightHandFrame = (xrController: XrController) => {
   rightHand.position.copy(position);
   rightHand.rotation.copy(rotation);
 
-  const direction = new Vector2(
-    angularVelocity.x,
-    angularVelocity.y
-  ).normalize();
+  const direction = new Vector2(-angularVelocity.y, angularVelocity.x);
 
   context.fillStyle = "#fff";
   context.fillRect(0, 0, 200, 100);
